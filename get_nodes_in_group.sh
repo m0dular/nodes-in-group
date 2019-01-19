@@ -28,11 +28,11 @@ rule="$(curl -s https://$puppet_server:4433/classifier-api/v1/groups --cert \
 
 # Translate it into something the /nodes enpoint can use
 translated_rule="$(curl -s -X POST --cert $puppet_host_cert --key $puppet_host_key --cacert $puppet_local_cert \
-   "https://$puppet_ server:4433/classifier-api/v1/rules/translate" -H 'Content-Type: application/json' --data "$rule" | jq -c '.query')"
+   "https://$puppet_server:4433/classifier-api/v1/rules/translate" -H 'Content-Type: application/json' --data "$rule" | jq -c '.query')"
 
 [[ $translated_rule ]] || fail "Error translating rule"
 
 # Print the node list
 curl -s --cert $puppet_host_cert --key $puppet_host_key --cacert $puppet_local_cert \
-   -G "https://$puppet_server:8081/pdb/query/v4 /nodes" --data-urlencode "query=$translated_rule" | jq '.[] | .certname'
+   -G "https://$puppet_server:8081/pdb/query/v4/nodes" --data-urlencode "query=$translated_rule" | jq '.[] | .certname'
 
