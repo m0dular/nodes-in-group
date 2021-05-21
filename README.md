@@ -1,6 +1,6 @@
 # nodes-in-group
 
-Get a list of nodes belonging to a specific node group in Puppet Enterprise.  Run from a Puppet master
+Get a list of nodes belonging to a specific node group in Puppet Enterprise.  Run from any node with valid certificates to talk to the Puppet apis.
 
 # Requirements
 
